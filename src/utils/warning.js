@@ -17,3 +17,5 @@ export default function warning(message) {
     throw new Error(message)
   } catch (e) {} // eslint-disable-line no-empty
 }
+
+/* assert 用于抛出错误 */

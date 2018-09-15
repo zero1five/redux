@@ -7,7 +7,7 @@ export default function createStore(reducer, preloadedState, enhancer) {
   if (typeof preloadedState === 'function' && typeof enhancer === 'undefined') {
     enhancer = preloadedState
     preloadedState = undefined
-  } /* 如果初始化的state是一个函数，则将它视为enhancer，preloadedState视为undefined */
+  } /* 如果没有preloadedState时，则将enhancer函数拿到，并将preloadedState设为undefined */
 
   if (typeof enhancer !== 'undefined') {
     if (typeof enhancer !== 'function') { /* 如果enhancer存在但是不是函数则抛出一个error */

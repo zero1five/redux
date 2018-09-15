@@ -12,3 +12,5 @@ export default function isPlainObject(obj) {
 
   return Object.getPrototypeOf(obj) === proto
 }
+
+/* 是否是普通对象， 非proxy、reflect */
