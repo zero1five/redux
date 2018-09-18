@@ -30,6 +30,10 @@ export default function applyMiddleware(...middlewares) {
       getState: store.getState,
       dispatch: (...args) => dispatch(...args)
     }
+    /*
+     * 将API方法传递给中间件，中间件该返回一个包装过的方法，
+     * 最后通过compose把多个中间件组合起来， 使得每次state更新，state都会经过每个中间件
+     */
     const chain = middlewares.map(middleware => middleware(middlewareAPI))
     dispatch = compose(...chain)(store.dispatch)
 
