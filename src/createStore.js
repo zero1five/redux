@@ -34,7 +34,7 @@ export default function createStore(reducer, preloadedState, enhancer) {
     }
   }
 
-  function getState() {
+  function getState() { /* 返回当前的state */
     if (isDispatching) {
       throw new Error(
         'You may not call store.getState() while the reducer is executing. ' +
@@ -65,12 +65,12 @@ export default function createStore(reducer, preloadedState, enhancer) {
     ensureCanMutateNextListeners()
     nextListeners.push(listener)
 
-    return function unsubscribe() {
+    return function unsubscribe() { /* 订阅方法返回取消订阅 */
       if (!isSubscribed) {
         return
       }
 
-      if (isDispatching) {
+      if (isDispatching) { /* 在reducer执行时，你可能无法取消listener */
         throw new Error(
           'You may not unsubscribe from a store listener while the reducer is executing. ' +
             'See https://redux.js.org/api-reference/store#subscribe(listener) for more details.'
@@ -111,13 +111,13 @@ export default function createStore(reducer, preloadedState, enhancer) {
       isDispatching = false
     }
 
-    const listeners = (currentListeners = nextListeners)
+    const listeners = (currentListeners = nextListeners) /* 在reducer完成之后， 依次触发listener */
     for (let i = 0; i < listeners.length; i++) {
       const listener = listeners[i]
       listener()
     }
 
-    return action
+    return action /* dispatch之后返回action */
   }
 
   function replaceReducer(nextReducer) {
